@@ -1,7 +1,6 @@
 "use strict"
 const numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
 
-let cykl =0;
 
 const personalMovieDB = {
     count: numberOfFilms,
@@ -23,21 +22,21 @@ if (personalMovieDB.count < 10){
     console.log('Wrong');
 }
 
-while(cykl < 2 ){
-   const lastFilm = prompt('Один из последних просмотренных фильмов? ', '');
-    const estimation = prompt('на сколько оцените его ', '');  
-  
-       
-    if(lastFilm != null && estimation != null && lastFilm != '' && estimation != '' && lastFilm.length < 50 ){
-        console.log ('There good');
-        personalMovieDB.movies[lastFilm] = estimation;
-    } else {
-        console.log('baaaaaaad');
-        cykl--;
-    }
-  cykl++;
-}
 
+for (let i = 1 ; i <3; i++ ) {
+
+    const lastFilm = prompt('Один из последних просмотренных фильмов? ', '');
+    const estimation = prompt('на сколько оцените его ', '');
+        if(lastFilm == null && estimation == null && lastFilm == '' && estimation == '' && lastFilm.length > 50 ){
+            console.log ('baaaaaaad');
+            i--;
+        } else {
+            console.log('There good');
+            personalMovieDB.movies[lastFilm] = estimation;
+        }
+
+
+}
 
 console.log(numberOfFilms);
 console.log(personalMovieDB.movies);
