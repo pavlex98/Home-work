@@ -18,7 +18,7 @@ const promoAdv = document.querySelectorAll('.promo__adv'),
       promoContent = document.querySelector('.promo__genre'),
       promoBg = document.querySelector('.promo__bg'),
       promoFilms = document.querySelectorAll('promo__interactive-item'),
-      promoFilmsList = document.querySelector('.promo__interactive-list'),
+      promoFilmsList = document.querySelector('.promo__interactive-list');
     
 
 
