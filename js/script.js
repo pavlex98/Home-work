@@ -1,86 +1,79 @@
-"use strict";
+/* Задания на урок:
 
-const personalMovieDB = {
-  count: 0,
-  movies: {},
-  actors: {},
-  genres: [],
-  privat: false,
-  start: function () {
-    personalMovieDB.count = +prompt("Сколько фильмов вы уже посмотрели?", "");
-    while (
-      personalMovieDB.count == "" ||
-      personalMovieDB.count == null ||
-      isNaN(personalMovieDB.count)
-    ) {
-      personalMovieDB.count = +prompt("Сколько фильмов вы уже посмотрели?", "");
-    }
-  },
-  detectPersonalLevel: () => {
-    if (personalMovieDB.count < 10) {
-      console.log("Просмотрено довольно мало фильмов");
-    } else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
-      console.log("Вы классический зритель");
-    } else if (personalMovieDB.count >= 30) {
-      console.log("Вы киноман");
-    } else {
-      console.log("Wrong");
-    }
-  },
-  rememberMyFilms: () => {
-    for (let i = 1; i < 3; i++) {
-      const lastFilm = prompt("Один из последних просмотренных фильмов? ", "");
-      const estimation = prompt("на сколько оцените его ", "");
-      if (
-        lastFilm != null &&
-        estimation != null &&
-        lastFilm != "" &&
-        estimation != "" &&
-        lastFilm.length < 50
-      ) {
-        console.log("There good");
-        personalMovieDB.movies[lastFilm] = estimation;
-      } else {
-        console.log("baaaaaaad");
-        i--;
-      }
-    }
-  },
-  showMyDB: (hidden) => {
-    if (!hidden) {
-      console.log(personalMovieDB);
-    }
-  },
-  toggleVisibleMyDB: function () {
-    if (personalMovieDB.privat) {
-      personalMovieDB.privat = false;
-    } else {
-      personalMovieDB.privat = true;
-    }
-  },
+1) Удалить все рекламные блоки со страницы (правая часть сайта)
 
-  writeYourGenres: () => {
-    for (let i = 1; i < 2; i++) {
-      // for(let i = 1; i < 4; i++){
-      // let genre = prompt(`Ваш любимый жанр под номером ${i}`);
+2) Изменить жанр фильма, поменять "комедия" на "драма"
 
-      // if (genre != null && genre != ""){
-      //      personalMovieDB.genres[i-1] = genre;
-      // }else{
-      //    i--;
-      // }
-      let genres = prompt("Введите любимые жанры через запятую:");
-      if (genres != null && genres != "") {
-        personalMovieDB.genres = genres.split(",");
-        personalMovieDB.genres.sort(); // сортирует по алфавиту
-      } else {
-        console.log("Вы не ввели данные или ввели их некорректно!!");
-        i--;
-      }
-    }
+3) Изменить задний фон постера с фильмом на изображение "bg.jpg". Оно лежит в папке img.
+Реализовать только при помощи JS
 
-    personalMovieDB.genres.forEach(function (item, i, genres) {
-      console.log(`Любимый жанр ${i + 1} - это ${item}`);
-    });
-  },
+4) Список фильмов на странице сформировать на основании данных из этого JS файла.
+Отсортировать их по алфавиту 
+
+5) Добавить нумерацию выведенных фильмов */
+
+'use strict';
+
+const promoAdv = document.querySelectorAll('.promo__adv'),
+      promoContent = document.querySelector('.promo__genre'),
+      promoBg = document.querySelector('.promo__bg'),
+      promoFilms = document.querySelectorAll('promo__interactive-item'),
+      promoFilmsList = document.querySelector('.promo__interactive-list'),
+    
+
+
+const movieDB = {
+    movies: [
+
+        "Логан",
+        "Лига справедливости",
+        "Ла-ла лэнд",
+        "Одержимость",
+        "Скотт Пилигрим против..."        
+    ]
 };
+
+
+promoAdv.forEach(element => {
+    element.remove()
+});
+
+// promoAdv.forEach(function(element) {
+//     element.remove()
+// });
+
+promoContent.textContent = "Драма";
+
+
+promoBg.style.backgroundImage = 'url("img/bg.jpg")';
+
+promoFilmsList.innerHTML = "";
+movieDB.movies.sort();
+
+
+movieDB.movies.forEach((film, i)=> {
+promoFilmsList.innerHTML += `
+    <li class="promo__interactive-item"><b>${++i}</b> - ${film}
+        <div class="delete"></div>
+    </li>
+` 
+});
+
+
+
+// function removeFilmList(){
+//     promoFilmsList.innerHTML = '';
+// }
+// function createFilmList(){
+//     removeFilmList();
+//     movieDB.movies.forEach(element => {
+//         const film = document.createElement('li');
+//         film.classList='promo__interactive-item';
+//         film.innerHTML=`
+//             ${element}
+//             <div class="delete"></div>
+//         `
+//         promoFilmsList.appendChild(film);
+//     });
+// }
+// createFilmList();
